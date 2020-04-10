@@ -1,7 +1,7 @@
 package internals
 
 import (
-	"github.com/pocockn/recs-api/models"
+	models "github.com/pocockn/mono-repo/pkg/models/api/recs"
 )
 
 // Storer represents the database interactions.

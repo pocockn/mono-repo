@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/pocockn/database-migrator/seeds"
+	"github.com/pocockn/mono-repo/core/database-migrator/seeds"
 )
 
 func processSeeds(db *gorm.DB) error {

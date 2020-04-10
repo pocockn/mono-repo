@@ -1,12 +1,12 @@
 package recs
 
 import (
-	"github.com/pocockn/recs-api/models"
+	"github.com/pocockn/mono-repo/pkg/models/api/recs"
 )
 
 // Store represents the database interactions.
 type Store interface {
-	Fetch(id uint) (rec models.Rec, err error)
-	FetchAll() (recs models.Recs, err error)
-	Update(rec *models.Rec) error
+	Fetch(id uint) (rec recs.Rec, err error)
+	FetchAll() (recs recs.Recs, err error)
+	Update(rec *recs.Rec) error
 }

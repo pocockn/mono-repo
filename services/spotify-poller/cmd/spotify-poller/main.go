@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/pocockn/spotify-poller/config"
-	"github.com/pocockn/spotify-poller/internals/database"
-	"github.com/pocockn/spotify-poller/internals/handler"
-	"github.com/pocockn/spotify-poller/internals/spotify"
-	"github.com/pocockn/spotify-poller/internals/store"
-	spotify_poller "github.com/pocockn/spotify-poller/pkg/poller"
+	spotify_poller "github.com/pocockn/mono-repo/pkg/poller"
+	"github.com/pocockn/mono-repo/services/spotify-poller/config"
+	"github.com/pocockn/mono-repo/services/spotify-poller/internals/database"
+	"github.com/pocockn/mono-repo/services/spotify-poller/internals/handler"
+	"github.com/pocockn/mono-repo/services/spotify-poller/internals/spotify"
+	"github.com/pocockn/mono-repo/services/spotify-poller/internals/store"
 	"github.com/sirupsen/logrus"
 	"time"
 )

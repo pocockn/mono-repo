@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/pocockn/database-migrator/migrations"
+	"github.com/pocockn/mono-repo/core/database-migrator/migrations"
 	"gopkg.in/gormigrate.v1"
 )
 

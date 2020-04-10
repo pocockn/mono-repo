@@ -2,7 +2,7 @@ package poller_test
 
 import (
 	"github.com/pkg/errors"
-	poller "github.com/pocockn/spotify-poller/pkg/poller"
+	"github.com/pocockn/mono-repo/pkg/poller"
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"

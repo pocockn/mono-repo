@@ -1,7 +1,7 @@
 package config_test
 
 import (
-	"github.com/pocockn/spotify-poller/config"
+	"github.com/pocockn/mono-repo/services/spotify-poller/config"
 	"os"
 	"testing"
 	"time"

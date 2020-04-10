@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"github.com/pocockn/recs-api/models"
-	"github.com/pocockn/spotify-poller/internals"
-	internal_spotify "github.com/pocockn/spotify-poller/internals/spotify"
+	models "github.com/pocockn/mono-repo/pkg/models/api/recs"
+	"github.com/pocockn/mono-repo/services/spotify-poller/internals"
+	internal_spotify "github.com/pocockn/mono-repo/services/spotify-poller/internals/spotify"
 	"github.com/sirupsen/logrus"
 	"github.com/zmb3/spotify"
 )

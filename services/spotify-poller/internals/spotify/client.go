@@ -3,7 +3,7 @@ package spotify
 import (
 	"context"
 	"github.com/pkg/errors"
-	"github.com/pocockn/spotify-poller/config"
+	"github.com/pocockn/mono-repo/services/spotify-poller/config"
 	"github.com/zmb3/spotify"
 	"golang.org/x/oauth2/clientcredentials"
 )

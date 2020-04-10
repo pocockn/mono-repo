@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/pocockn/database-migrator/seeds"
+	"github.com/pocockn/mono-repo/core/database-migrator/seeds"
 	"log"
 	"time"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/pocockn/database-migrator/config"
-	"github.com/pocockn/models/api/shouts"
+	"github.com/pocockn/mono-repo/core/database-migrator/config"
+	"github.com/pocockn/mono-repo/pkg/models/api/shouts"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/gormigrate.v1"
 )

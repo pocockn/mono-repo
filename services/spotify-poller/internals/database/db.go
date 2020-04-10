@@ -5,7 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/labstack/gommon/log"
-	"github.com/pocockn/spotify-poller/config"
+	"github.com/pocockn/mono-repo/services/spotify-poller/config"
 	"github.com/sirupsen/logrus"
 	"time"
 )

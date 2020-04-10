@@ -2,8 +2,8 @@ package store
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/pocockn/recs-api/models"
-	"github.com/pocockn/spotify-poller/internals"
+	models "github.com/pocockn/mono-repo/pkg/models/api/recs"
+	"github.com/pocockn/mono-repo/services/spotify-poller/internals"
 )
 
 type store struct {

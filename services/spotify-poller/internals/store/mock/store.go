@@ -6,7 +6,7 @@ package mock_internals
 
 import (
 	gomock "github.com/golang/mock/gomock"
-	models "github.com/pocockn/recs-api/models"
+	models "github.com/pocockn/mono-repo/pkg/models/api/recs"
 	reflect "reflect"
 )
 

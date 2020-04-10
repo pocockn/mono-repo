@@ -9,7 +9,7 @@ import (
 // RecsTableMigration holds the migration to create a rec table in the DB.
 func RecsTableMigration() *gormigrate.Migration {
 	return &gormigrate.Migration{
-		ID: uuid.Must(uuid.NewV4(),nil).String(),
+		ID: uuid.Must(uuid.NewV4(), nil).String(),
 		Migrate: func(tx *gorm.DB) error {
 			type Rec struct {
 				gorm.Model

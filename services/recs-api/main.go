@@ -3,10 +3,10 @@ package main
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/pocockn/recs-api/config"
-	"github.com/pocockn/mono-repo/recs-api/persistance"
-	"github.com/pocockn/recs-api/recs/delivery"
-	"github.com/pocockn/recs-api/recs/store"
+	"github.com/pocockn/mono-repo/services/recs-api/config"
+	"github.com/pocockn/mono-repo/services/recs-api/persistance"
+	"github.com/pocockn/mono-repo/services/recs-api/recs/delivery"
+	"github.com/pocockn/mono-repo/services/recs-api/recs/store"
 	"log"
 	"net/http"
 )

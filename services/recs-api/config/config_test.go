@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/pocockn/recs-api/config"
+	"github.com/pocockn/mono-repo/services/recs-api/config"
 	"github.com/stretchr/testify/assert"
 )
 

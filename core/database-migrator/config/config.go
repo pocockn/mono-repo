@@ -27,8 +27,7 @@ type (
 // NewConfig creates a new config struct.
 func NewConfig() Config {
 	var config Config
-
-	if _, err := toml.DecodeFile(fmt.Sprintf("./config/%s.toml", environment()), &config); err != nil {
+	if _, err := toml.DecodeFile(config.generatePath(), &config); err != nil {
 		fmt.Println(err)
 	}
 
@@ -56,6 +55,20 @@ func generateURL(username string, password string, host string, port string, dat
 	)
 }
 
-func environment() string {
-	return os.Getenv("ENV")
+func (c Config) environment() string {
+	environment := "development"
+
+	if os.Getenv("ENV") != "" {
+		environment = os.Getenv("ENV")
+	}
+
+	return environment
+}
+
+func (c Config) generatePath() string {
+	if os.Getenv("ENV") == "test" {
+		return "development.toml"
+	}
+
+	return fmt.Sprintf("config/%s.toml", c.environment())
 }

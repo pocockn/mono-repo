@@ -2,9 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/common-services" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/core/database-migrator" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/services/recs-api" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/services/spotify-poller" vcs="Git" />
   </component>
 </project>

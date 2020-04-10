@@ -4,14 +4,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/pocockn/database-migrator/config"
+	"github.com/pocockn/mono-repo/core/database-migrator/config"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestConfigCreation(t *testing.T) {
-	err := os.Setenv("ENV", "development")
-	assert.Nil(t, err)
-
 	expectedConfigStruct := config.Config{
 		Database: config.Database{
 			Host:         "127.0.0.1",
@@ -21,6 +18,10 @@ func TestConfigCreation(t *testing.T) {
 			Username:     "pocockn",
 		},
 	}
+
+	err := os.Setenv("ENV", "test")
+	assert.NoError(t, err)
+
 	config := config.NewConfig()
 
 	assert.Equal(t, expectedConfigStruct.Database.Host, config.Database.Host)

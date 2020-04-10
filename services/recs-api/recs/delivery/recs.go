@@ -1,10 +1,10 @@
 package delivery
 
 import (
-	"github.com/pocockn/recs-api/config"
-	"github.com/pocockn/recs-api/models"
-	"github.com/pocockn/recs-api/recs"
-	"github.com/pocockn/recs-api/services"
+	recsModel "github.com/pocockn/mono-repo/pkg/models/api/recs"
+	"github.com/pocockn/mono-repo/services/recs-api/config"
+	"github.com/pocockn/mono-repo/services/recs-api/recs"
+	"github.com/pocockn/mono-repo/services/recs-api/services"
 	"net/http"
 	"strconv"
 
@@ -57,7 +57,7 @@ func (h *Handler) FetchAll(c echo.Context) error {
 
 // Update updates a rec in the database.
 func (h *Handler) Update(c echo.Context) error {
-	rec := models.Rec{}
+	rec := recsModel.Rec{}
 	err := c.Bind(&rec)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
