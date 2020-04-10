@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  # ---
+  # Stores
+  # ---
+
+  database:
+    image: mysql:5.6.34
+    environment:
+      - MYSQL_ROOT_PASSWORD=pocockn
+      - MYSQL_DATABASE=docker_pocockn
+      - MYSQL_USER=pocockn
+      - MYSQL_PASSWORD=pocockn
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+  data-migrator:
+    image: pococknick91/database-migrator:0.16.0
+    environment:
+      - ENV=docker
+  recs-api:
+    image: pococknick91/recs-api:latest
+    environment:
+      - ENV=docker
+    depends_on:
+      - database
+    links:
+      - database:mysql
+    expose:
+      - 5000
+  dynamodb:
+    image: vidsyhq/fake-dynamodb:latest
+    expose:
+      - 6001
+    ports:
+      - 6001:6001
+  s3:
+    image: lphoward/fake-s3:latest
+    ports:
+      - 4569:4569
+    command: "-r /fakes3_root -p 4569 -H s3.local.shouts.co.uk"

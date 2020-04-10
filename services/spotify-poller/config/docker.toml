@@ -1,0 +1,17 @@
+################
+#   Database   #
+################
+
+[database]
+username = "pocockn"
+password = "pocockn"
+host = "database"
+databaseName = "docker_pocockn"
+port = "3306"
+
+[poller]
+interval = "10s"
+
+[spotify]
+clientID = "c3e7dae903c44c1586b9ee64d20dd262"
+playlistID = "01VmpQKq19m0CjP1bo1eMO"

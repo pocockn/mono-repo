@@ -1,0 +1,10 @@
+################
+#   Database   #
+################
+
+[database]
+username = "pocockn"
+password = "pocockn"
+host = "127.0.0.1"
+databaseName = "docker_pocockn"
+port = "3306"

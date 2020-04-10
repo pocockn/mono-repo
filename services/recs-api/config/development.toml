@@ -1,0 +1,18 @@
+################
+#   Database   #
+################
+
+[database]
+username = "pocockn"
+password = "pocockn"
+host = "127.0.0.1"
+databaseName = "docker_pocockn"
+port = "3306"
+
+[s3]
+### domain = "http://s3.local.shouts.co.uk:4569"
+domain = "http://s3.eu-west-1.amazonaws.com"
+bucket = "image-analysis-shouts"
+
+[sns]
+arn = "arn:aws:sns:eu-west-1:314572533291:image-similarity-analysis"
