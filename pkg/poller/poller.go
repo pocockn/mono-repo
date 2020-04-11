@@ -6,15 +6,16 @@ import (
 )
 
 type (
-	// HandlerFunc is a function that is run each time the API is polled.
+	// HandlerFunc is a function that is run each time allotted interval is up.
 	HandlerFunc func() error
 
-	// Poller will poll the API based on the interval passed in.
+	// Poller will execute the HandlerFunc every x number of minutes/seconds/hours
+	// this is based on the interval passed in.
 	Poller struct {
 		HandlerFunc HandlerFunc
-		interval    *time.Ticker
 		Errs        chan error
 		done        chan bool
+		interval    *time.Ticker
 	}
 )
 
@@ -30,17 +31,15 @@ func NewPoller(handlerFunc HandlerFunc, interval *time.Ticker) Poller {
 
 // Start starts take the poller.
 func (p *Poller) Start() <-chan error {
-	errc := make(chan error, 1)
-
 	go func() {
 		logrus.Info("polling initialized. Status: Running")
-		defer close(errc)
+		defer close(p.Errs)
 		for {
 			select {
 			case <-p.interval.C:
 				err := p.HandlerFunc()
 				if err != nil {
-					errc <- err
+					p.Errs <- err
 					return
 				}
 			case <-p.done:
@@ -50,7 +49,7 @@ func (p *Poller) Start() <-chan error {
 		}
 	}()
 
-	return errc
+	return p.Errs
 }
 
 // Stop the poller.
