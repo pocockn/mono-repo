@@ -1,2 +1,6 @@
 .idea
 .DS_Store
+bazel-bin
+bazel-mono-repo
+bazel-out
+bazel-testlogs

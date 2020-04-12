@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "config.go",
+        "duration.go",
+    ],
+    importpath = "github.com/pocockn/mono-repo/services/spotify-poller/config",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_burntsushi_toml//:go_default_library"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["config_test.go"],
+    data = ["development.toml"],
+    embed = [":go_default_library"],
+    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+)

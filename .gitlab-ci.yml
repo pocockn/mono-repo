@@ -1,0 +1,14 @@
+image: golang:1.14.2-stretch
+
+stages:
+  - build-recs
+  - test
+  - deploy
+
+build-recs:
+  stage: build-recs
+  script:
+    - go build -o recs-api ./services/recs-api/main.go
+  only:
+    changes:
+      - "services/recs-api"

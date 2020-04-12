@@ -1,0 +1,35 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "recs.go",
+        "routes.go",
+    ],
+    importpath = "github.com/pocockn/mono-repo/services/recs-api/recs/delivery",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/models/api/recs:go_default_library",
+        "//services/recs-api/config:go_default_library",
+        "//services/recs-api/recs:go_default_library",
+        "//services/recs-api/services:go_default_library",
+        "@com_github_jinzhu_gorm//dialects/mysql:go_default_library",
+        "@com_github_labstack_echo_v4//:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["recs_test.go"],
+    embed = [":go_default_library"],
+    deps = [
+        "@com_github_golang_mock//gomock:go_default_library",
+        "@com_github_jinzhu_gorm//:go_default_library",
+        "@com_github_labstack_echo_v4//:go_default_library",
+        "@com_github_pocockn_recs_api//config:go_default_library",
+        "@com_github_pocockn_recs_api//models:go_default_library",
+        "@com_github_pocockn_recs_api//recs/delivery:go_default_library",
+        "@com_github_pocockn_recs_api//recs/mocks:go_default_library",
+        "@com_github_stretchr_testify//assert:go_default_library",
+    ],
+)

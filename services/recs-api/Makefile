@@ -9,7 +9,7 @@ VERSION = $(shell cat ./VERSION)
 DEFAULT: test
 
 build:
-	@GO111MODULE=on go build "${PACKAGES}"
+	@GO111MODULE=on go build -o "${PACKAGES}"
 
 build-image:
 	@docker build -t ${IMG} .

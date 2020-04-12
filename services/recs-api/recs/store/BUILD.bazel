@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["recs.go"],
+    importpath = "github.com/pocockn/mono-repo/services/recs-api/recs/store",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/models/api/recs:go_default_library",
+        "//services/recs-api/recs:go_default_library",
+        "@com_github_jinzhu_gorm//:go_default_library",
+    ],
+)

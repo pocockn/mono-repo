@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "recs_table_02.go",
+        "shout_table_01.go",
+    ],
+    importpath = "github.com/pocockn/mono-repo/core/database-migrator/seeds",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_jinzhu_gorm//:go_default_library",
+        "@com_github_pocockn_models//api/shouts:go_default_library",
+    ],
+)
