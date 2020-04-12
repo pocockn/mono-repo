@@ -2,8 +2,7 @@ image: golang:1.14.2-stretch
 
 stages:
   - build-recs
-  - test
-  - deploy
+  - build-spotify
 
 build-recs:
   stage: build-recs
@@ -12,3 +11,8 @@ build-recs:
   only:
     changes:
       - "services/recs-api"
+
+build-spotify:
+  stage: build-recs
+  script:
+    - go build -o spotify-poller ./services/spotify-poller/cmd/main.go
