@@ -7,7 +7,7 @@ SPOTIFY_CLIENT_SECRET ?= ""
 VERSION = $(shell cat ./VERSION)
 
 
-DEFAULT: test
+DEFAULT: test this is a test
 
 build:
 	@GO111MODULE=on go build -race -o $(REPONAME) ./cmd/$(REPONAME)/main.go

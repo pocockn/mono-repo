@@ -9,7 +9,7 @@ stages:
 build-database-migrator:
   stage: build-database-migrator
   script:
-    - go build -o recs-api ./core/database-migrator/main.go
+    - go build -o database-migrator ./core/database-migrator/main.go
 
 build-recs:
   stage: build-recs
