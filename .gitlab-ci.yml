@@ -13,6 +13,6 @@ build-recs:
       - "services/recs-api"
 
 build-spotify:
-  stage: build-recs
+  stage: build-spotify
   script:
     - go build -o spotify-poller ./services/spotify-poller/cmd/main.go
