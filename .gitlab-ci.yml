@@ -48,6 +48,7 @@ deploy-recs:
   script:
     - export VERSION=$(cat ./services/recs-api/VERSION)
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - cd services/recs-api
     - docker build -t pococknick91/recs-api:$VERSION .
     - docker tag pococknick91/recs-api:$VERSION pococknick91/recs-api:latest
     - echo "=> Pushing pococknick91/recs-api:$VERSION to docker"
@@ -69,6 +70,7 @@ deploy-spotify-poller:
   script:
     - export VERSION=$(cat ./services/spotify-poller/VERSION)
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - cd services/spotify-poller
     - docker build -t pococknick91/spotify-poller:$VERSION .
     - docker tag pococknick91/spotify-poller:$VERSION pococknick91/spotify-poller:latest
     - echo "=> Pushing pococknick91/spotify-poller:$VERSION to docker"

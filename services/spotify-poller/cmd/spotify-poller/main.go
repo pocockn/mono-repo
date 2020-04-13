@@ -21,14 +21,14 @@ func main() {
 		logrus.Fatal(err)
 	}
 
-	handler := handler.NewHandler(
+	h := handler.NewHandler(
 		client,
 		pollerConfig.Spotify.PlaylistID,
 		store.NewStore(connection),
 	)
 
 	poller := spotify_poller.NewPoller(
-		handler.Spotify,
+		h.Spotify,
 		time.NewTicker(pollerConfig.Poller.Interval.Duration),
 	)
 
