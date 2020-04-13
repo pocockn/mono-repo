@@ -3,6 +3,7 @@ image: golang:1.14.2-stretch
 stages:
   - build
   - test
+  - deploy
 
 build-database-migrator:
   stage: build
@@ -32,3 +33,45 @@ test:
   stage: test
   script:
     - make test
+
+deploy-recs:
+  image: docker:stable
+  stage: deploy
+  services:
+    - docker:19.03.0-dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: "/certs"
+  only:
+    refs:
+      - master
+  script:
+    - export VERSION=$(cat ./services/recs-api/VERSION)
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - docker build -t pococknick91/recs-api:$VERSION .
+    - docker tag pococknick91/recs-api:$VERSION pococknick91/recs-api:latest
+    - echo "=> Pushing pococknick91/recs-api:$VERSION to docker"
+    - docker push pococknick91/recs-api
+  tags:
+    - docker
+
+deploy-spotify-poller:
+  image: docker:stable
+  stage: deploy
+  services:
+    - docker:19.03.0-dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: "/certs"
+  only:
+    refs:
+      - master
+  script:
+    - export VERSION=$(cat ./services/spotify-poller/VERSION)
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - docker build -t pococknick91/spotify-poller:$VERSION .
+    - docker tag pococknick91/spotify-poller:$VERSION pococknick91/spotify-poller:latest
+    - echo "=> Pushing pococknick91/spotify-poller:$VERSION to docker"
+    - docker push pococknick91/spotify-poller
+  tags:
+    - docker

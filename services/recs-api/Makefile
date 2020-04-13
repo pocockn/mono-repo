@@ -17,6 +17,10 @@ build-image:
 build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o $(BINARY_UNIX) -v
 
+check-version:
+	@echo "Checking if value of VERSION file exists as Git tag..."
+	(! git rev-list ${VERSION})
+
 install:
 	@echo "=> Install dependencies"
 	@GO111MODULE=on go mod download
