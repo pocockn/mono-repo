@@ -2,7 +2,7 @@ package migrations
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/pocockn/models/api/shouts"
+	"github.com/pocockn/mono-repo/pkg/models/api/shouts"
 	"github.com/satori/go.uuid"
 	"gopkg.in/gormigrate.v1"
 )

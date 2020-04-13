@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/pocockn/mono-repo/core/database-migrator/pkg/migration"
+	"github.com/pocockn/mono-repo/core/database-migrator/pkg/seed"
 	"github.com/pocockn/mono-repo/core/database-migrator/seeds"
 	"log"
 	"time"
@@ -39,7 +41,7 @@ func main() {
 		time.Sleep(2 * time.Second)
 	}
 
-	gormMigrator := gormigrate.New(DB, gormigrate.DefaultOptions, GenerateMigrations())
+	gormMigrator := gormigrate.New(DB, gormigrate.DefaultOptions, migration.Generate())
 
 	gormMigrator.InitSchema(func(tx *gorm.DB) error {
 		logrus.Print("Creating initial table schema...")
@@ -60,7 +62,7 @@ func main() {
 	}
 	logrus.Print("Initial schema migration successfull")
 
-	err = processSeeds(DB)
+	err = seed.Process(DB)
 	if err != nil {
 		log.Fatalf("Error will seeding database: %v", err)
 	}

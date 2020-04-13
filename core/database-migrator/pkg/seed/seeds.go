@@ -1,15 +1,15 @@
-package main
+package seed
 
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/pocockn/mono-repo/core/database-migrator/seeds"
 )
 
-func processSeeds(db *gorm.DB) error {
-	seeds := getSeeds()
-
-	for _, seed := range seeds {
-		err := seed(db)
+// Process processes the seeds for the local DB.
+func Process(db *gorm.DB) error {
+	seeds := get()
+	for _, s := range seeds {
+		err := s(db)
 		if err != nil {
 			return err
 		}
@@ -18,7 +18,7 @@ func processSeeds(db *gorm.DB) error {
 	return nil
 }
 
-func getSeeds() []func(db *gorm.DB) error {
+func get() []func(db *gorm.DB) error {
 	return []func(db *gorm.DB) error{
 		seeds.SeedShoutTable,
 		seeds.SeedRecsTable,
