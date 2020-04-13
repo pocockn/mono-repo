@@ -1,31 +1,32 @@
 image: golang:1.14.2-stretch
 
 stages:
-  - build-recs
-  - build-spotify
-  - build-database-migrator
+  - build
   - test
 
 build-database-migrator:
-  stage: build-database-migrator
+  stage: build
   script:
     - go build -o database-migrator ./core/database-migrator/main.go
+  only:
+    changes:
+      - core/database-migrator/**/*
 
 build-recs:
-  stage: build-recs
+  stage: build
   script:
     - go build -o recs-api ./services/recs-api/main.go
   only:
     changes:
-      - services/recs-api
+      - services/recs-api/**/*
 
 build-spotify:
-  stage: build-spotify
+  stage: build
   script:
     - go build -o spotify-poller ./services/spotify-poller/cmd/spotify-poller/main.go
   only:
     changes:
-      - services/spotify-api/*
+      - services/spotify-api/**/*
 
 test:
   stage: test
