@@ -30,6 +30,13 @@ services:
       - database:mysql
     expose:
       - 5000
+  spotify-poller:
+    image: pococknick91/spotify-poller:latest
+    environment:
+      - ENV=docker
+    depends_on:
+      - database
+      - recs-api
   dynamodb:
     image: vidsyhq/fake-dynamodb:latest
     expose:
