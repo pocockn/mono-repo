@@ -27,7 +27,7 @@ build-spotify:
     - go build -o spotify-poller ./services/spotify-poller/cmd/spotify-poller/main.go
   only:
     changes:
-      - services/spotify-api/**/*
+      - services/spotify-poller/**/*
 
 test:
   stage: test
@@ -45,11 +45,13 @@ deploy-recs:
   only:
     refs:
       - master
+    changes:
+      - services/recs-api/**/*
   script:
     - export VERSION=$(cat ./services/recs-api/VERSION)
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
     - cd services/recs-api
-    - docker build -t pococknick91/recs-api:$VERSION .
+    - docker build -t pococknick91/recs-api:$VERSION -f ./services/recs-api/Dockerfile .
     - docker tag pococknick91/recs-api:$VERSION pococknick91/recs-api:latest
     - echo "=> Pushing pococknick91/recs-api:$VERSION to docker"
     - docker push pococknick91/recs-api
@@ -71,7 +73,7 @@ deploy-spotify-poller:
     - export VERSION=$(cat ./services/spotify-poller/VERSION)
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
     - cd services/spotify-poller
-    - docker build -t pococknick91/spotify-poller:$VERSION .
+    - docker build -t pococknick91/spotify-poller:$VERSION -f ./services/spotify-poller/builds/Dockerfile .
     - docker tag pococknick91/spotify-poller:$VERSION pococknick91/spotify-poller:latest
     - echo "=> Pushing pococknick91/spotify-poller:$VERSION to docker"
     - docker push pococknick91/spotify-poller
