@@ -22,6 +22,8 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-RUN CGO_ENABLED=0 go build -o recs-api
+RUN CGO_ENABLED=0 go build -o recs-api ./services/recs-api
+
+RUN ls -l
 
 ENTRYPOINT ["/app/recs-api"]
