@@ -26,7 +26,7 @@ func TestPoller(t *testing.T) {
 		time.NewTicker(1*time.Millisecond),
 	)
 
-	poller.Start()
+	errChan := poller.Start()
 	poller.Stop()
 
 	for err := range errChan {
