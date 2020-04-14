@@ -35,7 +35,7 @@ func main() {
 	errChan := poller.Start()
 	for err := range errChan {
 		if err != nil {
-			logrus.Fatalf("fatal error: %s", err)
+			logrus.Fatalf("fatal error within poller: %s", err)
 		}
 	}
 }
