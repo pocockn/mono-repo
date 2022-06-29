@@ -6,8 +6,8 @@ jobs:
       - image: cimg/go:1.18.1
     steps:
       - checkout
-      - run: ls -l
-      - run: ls -l && make check-version
+      - run: cd services/spotify-poller
+      - run: make check-version
 
 workflows:
   version: 2

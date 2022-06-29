@@ -1,12 +1,13 @@
 version: 2
 jobs:
   recs_api_check_version:
+    working_directory: ~/services/recs-api
     docker:
-      - image: vidsyhq/go-builder:latest
+      - image: cimg/go:1.18.1
     steps:
       - checkout
+      - run: cd services/recs-api
       - run: make check-version
-    working_directory: /services/recs-api
 
 workflows:
   version: 2
