@@ -6,6 +6,7 @@ jobs:
       - image: cimg/go:1.18.1
     steps:
       - checkout
+      - run: ls -l
       - run: make check-version
 
 workflows:
