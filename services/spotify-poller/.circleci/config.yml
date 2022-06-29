@@ -1,13 +1,13 @@
 version: 2
 jobs:
   spotify_poller_check_version:
-    working_directory: ~/go/src/github.com/pocockn/mono-repo/services/spotify-poller
+    working_directory: ~/services/spotify-poller
     docker:
       - image: cimg/go:1.18.1
     steps:
       - checkout
       - run: ls -l
-      - run: make check-version
+      - run: ls -l && make check-version
 
 workflows:
   version: 2
