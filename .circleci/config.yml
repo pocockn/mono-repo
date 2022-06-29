@@ -26,12 +26,14 @@ workflows:
       - config-splitting/setup-dynamic-config:
           force-all: << pipeline.parameters.force-all >>
           base-revision: main
-          # If A is modified, the job for A will run
-          # Similarly if B is modified, the job for B will run
+          # If recs-api is modified, the job for recs-api will run
+          # Similarly if spotify-poller is modified, the job for spotify-poller will run
           # If C is modified, then the jobs for both C and B (as a dependency) will run
           modules: |
             services/recs-api
             services/spotify-poller
+
+# services
 
 orbs:
   # An "embedded" orb to facilitate config splitting
@@ -67,7 +69,8 @@ orbs:
           - run:
               name: Generate the list of modules having changes
               command: |
-                # Add each module to `modules-filtered` if 1) `force-all` is set to `true`, 2) there is a diff against `base-revision`, 3) there is no `HEAD~1` (i.e., this is the very first commit for the repo) OR 4) there is a diff against the previous commit
+                # Add each module to `modules-filtered` if 1) `force-all` is set to `true`, 2) there is a diff against `base-revision`, 3) 
+                # there is no `HEAD~1` (i.e., this is the very first commit for the repo) OR 4) there is a diff against the previous commit
                 cat \<< EOD | sed -e '/^$/d' | while read row; do module="$(echo "$row" | awk '{ print $1 }')"; if [ << parameters.force-all >> == 'true' ] || [ $(git diff --name-only << parameters.base-revision >> "$module" | wc -l) -gt 0 ] || (! git rev-parse --verify HEAD~1) || [ $(git diff --name-only HEAD~1 "$module" | wc -l) -gt 0 ]; then echo "$row" | sed -e 's/ /\n/g' >> << parameters.modules-filtered >>; fi; done
                 << parameters.modules >>
                 EOD
