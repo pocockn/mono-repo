@@ -6,9 +6,6 @@ LATEST ?= ${DOCKERNAME}/${REPONAME}:latest
 SPOTIFY_CLIENT_SECRET ?= ""
 VERSION = $(shell cat ./VERSION)
 
-
-DEFAULT: test this is a test
-
 build:
 	@GO111MODULE=on go build -race -o $(REPONAME) ./cmd/$(REPONAME)/main.go
 
@@ -17,6 +14,10 @@ build-image:
 
 build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o $(BINARY_UNIX) -v ./cmd/$(REPONAME)/main.go
+
+check-version:
+	@echo "Checking if value of VERSION file exists as Git tag..."
+	(! git rev-list ${VERSION})
 
 install:
 	@echo "=> Install dependencies"

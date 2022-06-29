@@ -25,7 +25,7 @@ func NewUpload(config config.Config, s3Client *s3.Client) Upload {
 	}
 }
 
-// UploadToS3 takes a number of files from a form and uploads it to S3.
+// MultiUpload takes a number of files from a form and uploads it to S3.
 func (u Upload) MultiUpload(files ...*multipart.FileHeader) error {
 	errorChannel := make(chan error)
 

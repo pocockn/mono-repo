@@ -17,11 +17,26 @@ services:
     ports:
       - 3306:3306
   data-migrator:
-    image: pococknick91/database-migrator:0.16.0
+    container_name: data-migrator
+    build:
+      context: ..
+      dockerfile: core/database-migrator/Dockerfile
+    networks:
+      - recs-for-the-decks
     environment:
       - ENV=docker
+
+  # ---
+  # Services
+  # ---
+
   recs-api:
-    image: pococknick91/recs-api:latest
+    container_name: recs-api
+    build:
+      context: ..
+      dockerfile: services/recs-api/Dockerfile
+    networks:
+      - recs-for-the-decks
     environment:
       - ENV=docker
     depends_on:
@@ -31,20 +46,18 @@ services:
     expose:
       - 5000
   spotify-poller:
-    image: pococknick91/spotify-poller:latest
+    container_name: spotify-poller
+    build:
+      context: ..
+      dockerfile: services/spotify-poller/Dockerfile
+    networks:
+      - recs-for-the-decks
     environment:
       - ENV=docker
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
     depends_on:
       - database
       - recs-api
-  dynamodb:
-    image: vidsyhq/fake-dynamodb:latest
-    expose:
-      - 6001
-    ports:
-      - 6001:6001
-  s3:
-    image: lphoward/fake-s3:latest
-    ports:
-      - 4569:4569
-    command: "-r /fakes3_root -p 4569 -H s3.local.shouts.co.uk"
+
+networks:
+  recs-for-the-decks:

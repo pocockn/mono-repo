@@ -12,14 +12,11 @@ ENV GO111MODULE=on
 RUN mkdir /app
 WORKDIR /app
 
-# Fetch dependencies first; they are less susceptible to change on every build
-# and will therefore be cached for speeding up the next build
-COPY ./go.mod ./go.sum ./
-RUN go mod download
+# Copy the source from the current directory to the Working Directory inside the container
+COPY . .
 
-# Import the code from the context.
-COPY ./ ./
+RUN ls -l
 
-RUN CGO_ENABLED=0 go build
+RUN cd core/database-migrator && CGO_ENABLED=0 go build -mod=vendor -o database-migrator
 
 ENTRYPOINT ["/app/database-migrator"]
