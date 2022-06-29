@@ -4,3 +4,5 @@ bazel-bin
 bazel-mono-repo
 bazel-out
 bazel-testlogs
+vendor
+.env

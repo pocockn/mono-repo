@@ -1,0 +1,13 @@
+version: 2.1
+setup: true
+orbs:
+  path-filtering: circleci/path-filtering@0.0.2
+workflows:
+  setup:
+    jobs:
+      - path-filtering/filter:
+          base-revision: master
+          mapping: |
+            services/recs-api/.* run-recs-api-workflow true
+            services/spotify-poller/.* run-spotify-poller-workflow true
+          config-path: .circleci/workflows.yml

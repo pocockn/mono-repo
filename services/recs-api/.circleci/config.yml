@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  recs_api_check_version:
+    docker:
+      - image: vidsyhq/go-builder:latest
+    steps:
+      - checkout
+      - run: make check-version
+    working_directory: /services/recs-api
+
+workflows:
+  version: 2
+  recs-api_install_test:
+    jobs:
+      - recs_api_check_version:
+          filters:
+            branches:
+              ignore: master

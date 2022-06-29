@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  spotify_poller_check_version:
+    docker:
+      - image: vidsyhq/go-builder:latest
+    steps:
+      - checkout
+      - run: make check-version
+    working_directory: /services/spotify-poller
+
+workflows:
+  version: 2
+  spotify_poller_install_test:
+    jobs:
+      - spotify_poller_check_version:
+          filters:
+            branches:
+              ignore: master
