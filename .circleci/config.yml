@@ -1,13 +1,34 @@
 version: 2.1
-setup: true
-orbs:
-  path-filtering: circleci/path-filtering@0.1.3
+
+setup: << pipeline.parameters.run-setup >>
+
+# All pipeline parameters need to be defined equally both for the setup workflow and main workflows
+# These parameters will be passed to both of them
+parameters:
+  run-setup:
+    description: Whether it is a setup workflow or a continuation
+    type: boolean
+    default: true
+  force-all:
+    description: Emergency valve - forcibly build all the modules
+    type: boolean
+    default: false
+  custom-parameter:
+    description: Some string to pass
+    type: string
+    default: ""
+
 workflows:
-  setup:
+  # The setup workflow
+  setup-workflow:
+    when: << pipeline.parameters.run-setup >>
     jobs:
-      - path-filtering/filter:
-          base-revision: master
-          mapping: |
-            services/recs-api/.* run-recs-api-workflow true
-            services/spotify-poller/.* run-spotify-poller-workflow true
-          config-path: .circleci/workflows.yml
+      - config-splitting/setup-dynamic-config:
+          force-all: << pipeline.parameters.force-all >>
+          base-revision: main
+          # If A is modified, the job for A will run
+          # Similarly if B is modified, the job for B will run
+          # If C is modified, then the jobs for both C and B (as a dependency) will run
+          modules: |
+            recs-api
+            spotify-poller
