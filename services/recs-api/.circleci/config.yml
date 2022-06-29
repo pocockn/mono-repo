@@ -6,8 +6,7 @@ jobs:
       - image: cimg/go:1.18.1
     steps:
       - checkout
-      - run: cd services/recs-api
-      - run: make check-version
+      - run: cd services/recs-api; make check-version
 
 workflows:
   version: 2
