@@ -1,4 +1,8 @@
 version: 2
+
+orbs:
+  path-filtering: circleci/path-filtering@0.0.2
+
 jobs:
   spotify_poller_check_version:
     working_directory: ~/services/spotify-poller
@@ -9,6 +13,7 @@ jobs:
       - run: cd services/spotify-poller; make check-version
 
 workflows:
+  setup:
   version: 2
   spotify_poller_install_test:
     jobs:
@@ -16,3 +21,7 @@ workflows:
           filters:
             branches:
               ignore: master
+      - path-filtering/filter:
+          base-revision: master
+          mapping: |
+            VERSION modified_version true   
