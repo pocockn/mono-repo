@@ -16,7 +16,7 @@ build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o $(BINARY_UNIX) -v ./cmd/$(REPONAME)/main.go
 
 check-version:
-	@echo "Checking if value of VERSION file exists as Git tag..."
+	echo "Checking if value of VERSION file exists as Git tag..."
 	(! git rev-list ${VERSION})
 
 install:

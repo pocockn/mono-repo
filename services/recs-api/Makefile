@@ -5,6 +5,7 @@ REPONAME ?= "recs-api"
 IMG ?= ${DOCKERNAME}/${REPONAME}:${VERSION}
 LATEST ?= ${DOCKERNAME}/${REPONAME}:latest
 VERSION = $(shell cat ./VERSION)
+TEST
 
 DEFAULT: test
 
