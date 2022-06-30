@@ -7,6 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
+          # TODO make into an orb.
           name: check-version
           command: >
             cd services/recs-api
