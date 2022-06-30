@@ -2,7 +2,7 @@ package services
 
 import (
 	"bytes"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/pocockn/awswrappers/s3"
 	"github.com/pocockn/mono-repo/services/recs-api/config"
 	"mime/multipart"
