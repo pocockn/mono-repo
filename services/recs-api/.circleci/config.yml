@@ -9,6 +9,8 @@ jobs:
       - run:
           name: check-version
           command: >
+            cd services/recs-api
+            
             if [[ -f VERSION ]]; then
               cat VERSION > NEW_VERSION
             elif [[ -f package.json ]]; then
