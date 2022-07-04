@@ -6,3 +6,4 @@ bazel-out
 bazel-testlogs
 vendor
 .env
+node_modules

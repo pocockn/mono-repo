@@ -12,6 +12,7 @@ require (
 	github.com/pocockn/awswrappers v0.0.0-20190604072748-a1628bbacc94
 	github.com/pocockn/models v0.8.0
 	github.com/pocockn/recs-api v0.1.0
+	github.com/rs/zerolog v1.27.0
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.5.0
 	github.com/stretchr/testify v1.7.0
@@ -30,7 +31,7 @@ require (
 	github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.1 // indirect
 	github.com/labstack/echo v3.3.10+incompatible // indirect
-	github.com/mattn/go-colorable v0.1.11 // indirect
+	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

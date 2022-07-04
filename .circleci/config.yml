@@ -25,7 +25,7 @@ workflows:
     jobs:
       - config-splitting/setup-dynamic-config:
           force-all: << pipeline.parameters.force-all >>
-          base-revision: main
+          base-revision: master
           # If recs-api is modified, the job for recs-api will run
           # Similarly if spotify-poller is modified, the job for spotify-poller will run
           # If C is modified, then the jobs for both C and B (as a dependency) will run
