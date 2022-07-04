@@ -8,18 +8,18 @@ import (
 	"golang.org/x/oauth2/clientcredentials"
 )
 
-// Client is a wrapper around the SpotifyClient interface.
-type Client struct {
-	SpotifyClient
+// client is a wrapper around the Client interface.
+type client struct {
+	Client
 }
 
 // Client is an interface that allows us to mock the spotify client in testing.
-type SpotifyClient interface {
+type Client interface {
 	GetPlaylist(playlistID spotify.ID) (*spotify.FullPlaylist, error)
 }
 
 // NewClient creates a new Spotify client.
-func NewClient(config config.Spotify) (SpotifyClient, error) {
+func NewClient(config config.Spotify) (Client, error) {
 	oauthConfig := &clientcredentials.Config{
 		ClientID:     config.ClientID,
 		ClientSecret: config.ClientSecret,
@@ -38,8 +38,8 @@ func NewClient(config config.Spotify) (SpotifyClient, error) {
 
 // GetPlaylist takes a spotify client and a playlist ID, it takes a client so we can mock
 // a fake client in the tests.
-func (c *Client) GetPlaylist(playlistID spotify.ID) (*spotify.FullPlaylist, error) {
-	result, err := c.SpotifyClient.GetPlaylist(playlistID)
+func (c *client) GetPlaylist(playlistID spotify.ID) (*spotify.FullPlaylist, error) {
+	result, err := c.Client.GetPlaylist(playlistID)
 	if err != nil {
 		return nil, errors.Wrap(err, "problem getting playlist")
 	}

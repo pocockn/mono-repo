@@ -5,8 +5,8 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/labstack/gommon/log"
+	"github.com/pocockn/mono-repo/pkg/logs"
 	"github.com/pocockn/mono-repo/services/spotify-poller/config"
-	"github.com/sirupsen/logrus"
 	"time"
 )
 
@@ -48,7 +48,7 @@ func (g GormDB) Connect() *gorm.DB {
 			log.Fatalf("unable to connect to %s after 30 seconds", g.url)
 		}
 
-		logrus.Infof("%d attempt at connecting to the DB \n", i)
+		logs.Logger.Info().Msgf("%d attempt at connecting to the DB", i)
 		time.Sleep(2 * time.Second)
 	}
 

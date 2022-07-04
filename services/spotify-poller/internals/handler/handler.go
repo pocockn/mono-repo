@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"github.com/pocockn/mono-repo/pkg/logs"
 	models "github.com/pocockn/mono-repo/pkg/models/api/recs"
 	"github.com/pocockn/mono-repo/services/spotify-poller/internals"
 	internal_spotify "github.com/pocockn/mono-repo/services/spotify-poller/internals/spotify"
@@ -11,14 +12,14 @@ import (
 type (
 	// Handler holds the dependencies the handler function needs.
 	Handler struct {
-		client     internal_spotify.SpotifyClient
+		client     internal_spotify.Client
 		playlistID string
 		store      internals.Storer
 	}
 )
 
 // NewHandler creates a new handler struct.
-func NewHandler(client internal_spotify.SpotifyClient, playlistID string, store internals.Storer) Handler {
+func NewHandler(client internal_spotify.Client, playlistID string, store internals.Storer) Handler {
 	return Handler{
 		client:     client,
 		playlistID: playlistID,
@@ -52,7 +53,9 @@ func (h *Handler) addNewRecs(playlist *spotify.FullPlaylist, existingRecs models
 
 	for _, t := range playlist.Tracks.Tracks {
 		if h.found(existingRecs, t.Track.ID.String()) {
-			logrus.Debugf("track : %s with ID : %s already in database, skipping.", t.Track.Name, t.Track.ID.String())
+			logs.Logger.Debug().Msgf(
+				"track : %s with ID : %s already in database, skipping.", t.Track.Name, t.Track.ID.String(),
+			)
 			continue
 		}
 

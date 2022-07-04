@@ -1,24 +1,26 @@
 package main
 
 import (
-	spotify_poller "github.com/pocockn/mono-repo/pkg/poller"
+	"fmt"
+	"time"
+
+	"github.com/pocockn/mono-repo/pkg/logs"
+	"github.com/pocockn/mono-repo/pkg/poller"
 	"github.com/pocockn/mono-repo/services/spotify-poller/config"
 	"github.com/pocockn/mono-repo/services/spotify-poller/internals/database"
 	"github.com/pocockn/mono-repo/services/spotify-poller/internals/handler"
 	"github.com/pocockn/mono-repo/services/spotify-poller/internals/spotify"
 	"github.com/pocockn/mono-repo/services/spotify-poller/internals/store"
-	"github.com/sirupsen/logrus"
-	"time"
 )
 
 func main() {
-	logrus.SetLevel(logrus.DebugLevel)
+	logs.New(logs.WithDebug(), logs.WithService("spotify-poller"), logs.WithVersion("0.1.0"))
 	pollerConfig := config.NewConfig()
 	connection := database.NewConnection(pollerConfig)
 
 	client, err := spotify.NewClient(pollerConfig.Spotify)
 	if err != nil {
-		logrus.Fatal(err)
+		logs.Logger.Fatal().Err(err).Send()
 	}
 
 	h := handler.NewHandler(
@@ -27,15 +29,15 @@ func main() {
 		store.NewStore(connection),
 	)
 
-	poller := spotify_poller.NewPoller(
+	p := poller.NewPoller(
 		h.Spotify,
 		time.NewTicker(pollerConfig.Poller.Interval.Duration),
 	)
 
-	errChan := poller.Start()
+	errChan := p.Start()
 	for err := range errChan {
 		if err != nil {
-			logrus.Fatalf("fatal error within poller: %s", err)
+			logs.Logger.Fatal().Err(fmt.Errorf("fatal error within poller %w", err)).Send()
 		}
 	}
 }
