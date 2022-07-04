@@ -10,9 +10,10 @@ import (
 // Usage - logs.Logger.Info().Msgf("%d attempt at connecting to the DB", i)
 var Logger zerolog.Logger
 
-// New sets the global log level and creates the logger, directing logs to Stderr.
+// New sets the global log level and assigns the global logger to the package variable.
 // It expects the version number and service name to attach additional config to the logs.
 // We set the default writer as os.Stdout. This can be customized with the WithWriter function option.
+// logs.New(logs.WithWriter(os.Stderr))
 func New(opts ...NewFuncOption) {
 	logLevel := zerolog.InfoLevel
 	zerolog.SetGlobalLevel(logLevel)
