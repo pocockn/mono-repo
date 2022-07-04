@@ -13,6 +13,7 @@ require (
 	github.com/pocockn/models v0.8.0
 	github.com/pocockn/recs-api v0.1.0
 	github.com/rs/zerolog v1.27.0
+	github.com/rzajac/zltest v0.12.0
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.5.0
 	github.com/stretchr/testify v1.7.0

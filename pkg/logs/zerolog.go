@@ -2,6 +2,7 @@ package logs
 
 import (
 	"github.com/rs/zerolog"
+	"io"
 	"os"
 )
 
@@ -11,11 +12,11 @@ var Logger zerolog.Logger
 
 // New sets the global log level and creates the logger, directing logs to Stderr.
 // It expects the version number and service name to attach additional config to the logs.
+// We set the default writer as os.Stdout. This can be customized with the WithWriter function option.
 func New(opts ...NewFuncOption) {
 	logLevel := zerolog.InfoLevel
-	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 	zerolog.SetGlobalLevel(logLevel)
-
+	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 	for _, o := range opts {
 		logger = o(&logger)
 	}
@@ -45,5 +46,12 @@ func WithVersion(version string) NewFuncOption {
 func WithService(service string) NewFuncOption {
 	return func(zl *zerolog.Logger) zerolog.Logger {
 		return zl.With().Str("service", service).Logger()
+	}
+}
+
+// WithWriter specifies where to write the logs.
+func WithWriter(writer io.Writer) NewFuncOption {
+	return func(zl *zerolog.Logger) zerolog.Logger {
+		return zerolog.New(writer).With().Timestamp().Logger()
 	}
 }
